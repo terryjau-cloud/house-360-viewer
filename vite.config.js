@@ -1,0 +1,24 @@
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  root: ".",
+  publicDir: "public",
+  base: "./",
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+    assetsDir: "assets",
+    cssMinify: true,
+    minify: "esbuild",
+    sourcemap: false,
+    rollupOptions: {
+      input: {
+        index: "src/index.html"
+      }
+    }
+  },
+  esbuild: {
+    drop: ["console", "debugger"],
+    legalComments: "none"
+  }
+});
