@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var heroOverlay = document.getElementById("hero-overlay");
   var heroToggle = document.getElementById("hero-toggle");
   var mobileQuery = window.matchMedia("(max-width: 760px)");
-  var pannellumApi = window.pannellum;
 
   function getRoom(roomId) {
     return rooms.find(function (room) {
@@ -165,11 +164,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function createViewer(room) {
-    if (!pannellumApi) {
-      showError("Pannellum CDN");
-      return;
-    }
-
     if (viewer && typeof viewer.destroy === "function") {
       viewer.destroy();
     }
@@ -178,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
       panorama.innerHTML = "";
     }
 
-    viewer = pannellumApi.viewer("panorama", {
+    viewer = pannellum.viewer("panorama", {
       type: "equirectangular",
       panorama: room.panorama,
       autoLoad: true,
