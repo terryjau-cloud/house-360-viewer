@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: "diningroom",
-      label: "餐廳",
+      label: "廚房",
       panorama: "assets/panoramas/diningroom.jpg",
-      map: { x: 34, y: 47 },
+      map: { x: 50, y: 88 },
       view: { pitch: -2, yaw: 28, hfov: 100 }
     },
     {
