@@ -10,8 +10,10 @@ Prepare these files before publishing the full apartment tour:
 - `assets/panoramas/livingroom.jpg`
 - `assets/panoramas/diningroom.jpg`
 - `assets/panoramas/master-bedroom.jpg`
+- `assets/panoramas/masterbathroom.jpg`
 - `assets/panoramas/guest-bedroom-1.jpg`
 - `assets/panoramas/guest-bedroom-2.jpg`
+- `assets/panoramas/guestbathroom.jpg`
 - `assets/panoramas/balcony.jpg`
 - `assets/panoramas/outside.jpg`
 

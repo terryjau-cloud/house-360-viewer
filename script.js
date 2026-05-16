@@ -22,6 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
       view: { pitch: 0, yaw: 0, hfov: 100 }
     },
     {
+      id: "master-bathroom",
+      label: "主衛浴",
+      panorama: "assets/panoramas/masterbathroom.jpg",
+      map: { x: 65, y: 24 },
+      view: { pitch: -2, yaw: 12, hfov: 96 }
+    },
+    {
       id: "guest-bedroom-1",
       label: "客臥1",
       panorama: "assets/panoramas/guest-bedroom-1.jpg",
@@ -34,6 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
       panorama: "assets/panoramas/guest-bedroom-2.jpg",
       map: { x: 25, y: 70 },
       view: { pitch: 0, yaw: 42, hfov: 100 }
+    },
+    {
+      id: "guest-bathroom",
+      label: "客衛浴",
+      panorama: "assets/panoramas/guestbathroom.jpg",
+      map: { x: 41, y: 36 },
+      view: { pitch: -2, yaw: -20, hfov: 96 }
     },
     {
       id: "balcony",
