@@ -1,67 +1,74 @@
 document.addEventListener("DOMContentLoaded", function () {
   var rooms = [
     {
+      id: "outside",
+      label: "房子外觀 / 門外",
+      panorama: "assets/panoramas/outside.jpg",
+      map: { x: 13, y: 86 },
+      view: { pitch: -2, yaw: 0, hfov: 98 }
+    },
+    {
       id: "livingroom",
       label: "客廳",
       panorama: "assets/panoramas/livingroom.jpg",
-      map: { x: 43, y: 57 },
+      map: { x: 30, y: 63 },
       view: { pitch: 0, yaw: 0, hfov: 105 }
     },
     {
       id: "diningroom",
       label: "餐廳",
       panorama: "assets/panoramas/diningroom.jpg",
-      map: { x: 57, y: 44 },
+      map: { x: 34, y: 47 },
       view: { pitch: -2, yaw: 28, hfov: 100 }
+    },
+    {
+      id: "kitchen",
+      label: "廚房",
+      panorama: "assets/panoramas/kitchen.jpg",
+      map: { x: 50, y: 88 },
+      view: { pitch: -2, yaw: 18, hfov: 98 }
     },
     {
       id: "master-bedroom",
       label: "主臥",
       panorama: "assets/panoramas/master-bedroom.jpg",
-      map: { x: 73, y: 32 },
+      map: { x: 70, y: 34 },
       view: { pitch: 0, yaw: 0, hfov: 100 }
-    },
-    {
-      id: "master-bathroom",
-      label: "主衛浴",
-      panorama: "assets/panoramas/masterbathroom.jpg",
-      map: { x: 65, y: 24 },
-      view: { pitch: -2, yaw: 12, hfov: 96 }
     },
     {
       id: "guest-bedroom-1",
       label: "客臥 1",
       panorama: "assets/panoramas/guest-bedroom-1.jpg",
-      map: { x: 26, y: 30 },
+      map: { x: 76, y: 63 },
       view: { pitch: 0, yaw: -18, hfov: 100 }
     },
     {
       id: "guest-bedroom-2",
       label: "客臥 2",
       panorama: "assets/panoramas/guest-bedroom-2.jpg",
-      map: { x: 25, y: 70 },
+      map: { x: 24, y: 25 },
       view: { pitch: 0, yaw: 42, hfov: 100 }
-    },
-    {
-      id: "guest-bathroom",
-      label: "客衛浴",
-      panorama: "assets/panoramas/guestbathroom.jpg",
-      map: { x: 41, y: 36 },
-      view: { pitch: -2, yaw: -20, hfov: 96 }
     },
     {
       id: "balcony",
       label: "陽台",
       panorama: "assets/panoramas/balcony.jpg",
-      map: { x: 79, y: 66 },
+      map: { x: 82, y: 80 },
       view: { pitch: -4, yaw: 12, hfov: 96 }
     },
     {
-      id: "outside",
-      label: "房子外觀 / 門外",
-      panorama: "assets/panoramas/outside.jpg",
-      map: { x: 50, y: 86 },
-      view: { pitch: -2, yaw: 0, hfov: 98 }
+      id: "master-bathroom",
+      label: "主衛浴",
+      panorama: "assets/panoramas/masterbathroom.jpg",
+      map: { x: 48, y: 25 },
+      view: { pitch: -2, yaw: 12, hfov: 96 }
+    },
+    {
+      id: "guest-bathroom",
+      label: "客衛浴",
+      panorama: "assets/panoramas/guestbathroom.jpg",
+      map: { x: 49, y: 38 },
+      view: { pitch: -2, yaw: -20, hfov: 96 }
     }
   ];
 
@@ -91,7 +98,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showError(path) {
     setLoading(false);
-    panorama.classList.remove("is-switching");
+
+    if (panorama) {
+      panorama.classList.remove("is-switching");
+    }
 
     if (errorMessage) {
       errorMessage.textContent = "請放入對應的 360 圖片：" + path;
@@ -135,7 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
       pin.dataset.room = room.id;
       pin.style.left = room.map.x + "%";
       pin.style.top = room.map.y + "%";
+      pin.setAttribute("aria-label", "切換至" + room.label);
       pin.setAttribute("aria-pressed", "false");
+      pin.setAttribute("title", room.label);
       pin.textContent = room.label;
       pin.addEventListener("click", function () {
         switchRoom(room.id);
