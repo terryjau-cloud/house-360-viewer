@@ -11,7 +11,6 @@ Static 360 rental showcase for GitHub Pages.
 - `assets/floorplan/floorplan.png`
 - `assets/panoramas/livingroom.jpg`
 - `assets/panoramas/diningroom.jpg`
-- `assets/panoramas/kitchen.jpg`
 - `assets/panoramas/master-bedroom.jpg`
 - `assets/panoramas/masterbathroom.jpg`
 - `assets/panoramas/guest-bedroom-1.jpg`
@@ -30,7 +29,6 @@ If a panorama is missing, the site will keep running and show a friendly message
 
 - 客廳
 - 餐廳
-- 廚房
 - 主臥
 - 主衛浴
 - 客臥 1

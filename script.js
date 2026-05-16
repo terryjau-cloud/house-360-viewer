@@ -22,13 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
       view: { pitch: -2, yaw: 28, hfov: 100 }
     },
     {
-      id: "kitchen",
-      label: "廚房",
-      panorama: "assets/panoramas/kitchen.jpg",
-      map: { x: 50, y: 88 },
-      view: { pitch: -2, yaw: 18, hfov: 98 }
-    },
-    {
       id: "master-bedroom",
       label: "主臥",
       panorama: "assets/panoramas/master-bedroom.jpg",
