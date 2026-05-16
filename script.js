@@ -1,16 +1,85 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var rooms = [
+    {
+      id: "livingroom",
+      label: "客廳",
+      panorama: "assets/panoramas/livingroom.jpg",
+      map: { x: 43, y: 57 },
+      view: { pitch: 0, yaw: 0, hfov: 105 }
+    },
+    {
+      id: "diningroom",
+      label: "餐廳",
+      panorama: "assets/panoramas/diningroom.jpg",
+      map: { x: 57, y: 44 },
+      view: { pitch: -2, yaw: 28, hfov: 100 }
+    },
+    {
+      id: "master-bedroom",
+      label: "主臥",
+      panorama: "assets/panoramas/master-bedroom.jpg",
+      map: { x: 73, y: 32 },
+      view: { pitch: 0, yaw: 0, hfov: 100 }
+    },
+    {
+      id: "guest-bedroom-1",
+      label: "客臥1",
+      panorama: "assets/panoramas/guest-bedroom-1.jpg",
+      map: { x: 26, y: 30 },
+      view: { pitch: 0, yaw: -18, hfov: 100 }
+    },
+    {
+      id: "guest-bedroom-2",
+      label: "客臥2",
+      panorama: "assets/panoramas/guest-bedroom-2.jpg",
+      map: { x: 25, y: 70 },
+      view: { pitch: 0, yaw: 42, hfov: 100 }
+    },
+    {
+      id: "balcony",
+      label: "陽台",
+      panorama: "assets/panoramas/balcony.jpg",
+      map: { x: 79, y: 66 },
+      view: { pitch: -4, yaw: 12, hfov: 96 }
+    },
+    {
+      id: "outside",
+      label: "房子外觀/門外",
+      panorama: "assets/panoramas/outside.jpg",
+      map: { x: 50, y: 86 },
+      view: { pitch: -2, yaw: 0, hfov: 98 }
+    }
+  ];
+
+  var viewer;
+  var currentRoomId = rooms[0].id;
   var loading = document.getElementById("viewer-loading");
   var error = document.getElementById("viewer-error");
-  var tabs = document.querySelectorAll(".location-tab");
-  var viewpoints = {
-    living: { pitch: 0, yaw: 0, hfov: 105 },
-    window: { pitch: -2, yaw: 72, hfov: 92 },
-    entry: { pitch: -4, yaw: -86, hfov: 98 }
-  };
+  var errorMessage = document.getElementById("viewer-error-message");
+  var panorama = document.getElementById("panorama");
+  var roomTabs = document.getElementById("room-tabs");
+  var mapPins = document.getElementById("map-pins");
+  var mapToggle = document.getElementById("map-toggle");
+  var floorplanCard = document.querySelector(".floorplan-card");
+  var floorplanImage = document.querySelector(".floorplan-map img");
 
-  function showError() {
+  function getRoom(roomId) {
+    return rooms.find(function (room) {
+      return room.id === roomId;
+    });
+  }
+
+  function setLoading(isLoading) {
     if (loading) {
-      loading.hidden = true;
+      loading.hidden = !isLoading;
+    }
+  }
+
+  function showError(path) {
+    setLoading(false);
+
+    if (errorMessage) {
+      errorMessage.textContent = "請放入對應的 360 圖片：" + path;
     }
 
     if (error) {
@@ -18,53 +87,133 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function hideLoading() {
-    if (loading) {
-      loading.hidden = true;
+  function hideError() {
+    if (error) {
+      error.hidden = true;
     }
   }
 
-  try {
-    var viewer = pannellum.viewer("panorama", {
-    type: "equirectangular",
-    panorama: "assets/panoramas/livingroom.jpg",
-    autoLoad: true,
-    showZoomCtrl: true,
-    showFullscreenCtrl: true,
-    compass: false,
-    hfov: 105,
-    pitch: 0,
-    yaw: 0,
-    minHfov: 50,
-    maxHfov: 120
-  });
+  function preloadImage(path, onLoad, onError) {
+    var image = new Image();
 
-    viewer.on("load", hideLoading);
-    viewer.on("error", showError);
+    image.onload = onLoad;
+    image.onerror = onError;
+    image.src = path;
+  }
 
-    tabs.forEach(function (tab) {
+  function renderRoomControls() {
+    rooms.forEach(function (room) {
+      var tab = document.createElement("button");
+      tab.className = "location-tab";
+      tab.type = "button";
+      tab.dataset.room = room.id;
+      tab.setAttribute("aria-pressed", "false");
+      tab.textContent = room.label;
       tab.addEventListener("click", function () {
-        var selectedView = viewpoints[tab.dataset.view];
-
-        if (!selectedView) {
-          return;
-        }
-
-        tabs.forEach(function (item) {
-          item.classList.toggle("is-active", item === tab);
-          item.setAttribute("aria-pressed", item === tab ? "true" : "false");
-        });
-
-        viewer.lookAt(selectedView.pitch, selectedView.yaw, selectedView.hfov, 900);
+        switchRoom(room.id);
       });
+      roomTabs.appendChild(tab);
+
+      var pin = document.createElement("button");
+      pin.className = "map-pin";
+      pin.type = "button";
+      pin.dataset.room = room.id;
+      pin.style.left = room.map.x + "%";
+      pin.style.top = room.map.y + "%";
+      pin.setAttribute("aria-pressed", "false");
+      pin.textContent = room.label;
+      pin.addEventListener("click", function () {
+        switchRoom(room.id);
+      });
+      mapPins.appendChild(pin);
+    });
+  }
+
+  function updateActiveRoom(roomId) {
+    var controls = document.querySelectorAll("[data-room]");
+
+    controls.forEach(function (control) {
+      var isActive = control.dataset.room === roomId;
+
+      control.classList.toggle("is-active", isActive);
+      control.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+  }
+
+  function createViewer(room) {
+    if (viewer && typeof viewer.destroy === "function") {
+      viewer.destroy();
+    }
+
+    if (panorama) {
+      panorama.innerHTML = "";
+    }
+
+    viewer = pannellum.viewer("panorama", {
+      type: "equirectangular",
+      panorama: room.panorama,
+      autoLoad: true,
+      showZoomCtrl: true,
+      showFullscreenCtrl: true,
+      compass: false,
+      hfov: room.view.hfov,
+      pitch: room.view.pitch,
+      yaw: room.view.yaw,
+      minHfov: 50,
+      maxHfov: 120
     });
 
-    window.setTimeout(function () {
-      if (loading && !loading.hidden) {
-        showError();
-      }
-    }, 12000);
-  } catch (viewerError) {
-    showError();
+    viewer.on("load", function () {
+      setLoading(false);
+    });
+
+    viewer.on("error", function () {
+      showError(room.panorama);
+    });
   }
+
+  function switchRoom(roomId) {
+    var room = getRoom(roomId);
+
+    if (!room) {
+      return;
+    }
+
+    currentRoomId = room.id;
+    updateActiveRoom(room.id);
+    hideError();
+    setLoading(true);
+
+    preloadImage(
+      room.panorama,
+      function () {
+        try {
+          createViewer(room);
+        } catch (viewerError) {
+          showError(room.panorama);
+        }
+      },
+      function () {
+        showError(room.panorama);
+      }
+    );
+  }
+
+  if (floorplanImage) {
+    floorplanImage.addEventListener("error", function () {
+      floorplanImage.classList.add("is-missing");
+    });
+  }
+
+  if (mapToggle && floorplanCard) {
+    mapToggle.addEventListener("click", function () {
+      var isCollapsed = floorplanCard.classList.toggle("is-collapsed");
+
+      mapToggle.textContent = isCollapsed ? "Show" : "Hide";
+      mapToggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+    });
+  }
+
+  renderRoomControls();
+  switchRoom(currentRoomId);
 });

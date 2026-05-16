@@ -120,6 +120,11 @@ h2 {
   line-height: 1;
 }
 
+h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
 .hero-copy {
   max-width: 620px;
   margin-bottom: 30px;
@@ -187,6 +192,145 @@ h2 {
 
 .section-heading p:last-child {
   color: var(--muted);
+}
+
+.tour-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.tour-view {
+  min-width: 0;
+}
+
+.floorplan-card {
+  position: sticky;
+  top: 92px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--surface-strong), var(--surface));
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(18px);
+}
+
+.floorplan-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.floorplan-header .eyebrow {
+  margin-bottom: 5px;
+}
+
+.map-toggle {
+  display: none;
+  min-height: 38px;
+  padding: 0 14px;
+  border: 1px solid rgba(240, 217, 159, 0.4);
+  border-radius: 999px;
+  background: rgba(215, 188, 125, 0.1);
+  color: var(--accent-strong);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.floorplan-body {
+  padding: 16px;
+}
+
+.floorplan-map {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  border: 1px solid rgba(232, 211, 170, 0.16);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
+    #17140f;
+}
+
+.floorplan-map img {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  opacity: 0.88;
+}
+
+.floorplan-map img.is-missing {
+  opacity: 0.08;
+}
+
+.floorplan-map::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(180deg, transparent, rgba(13, 13, 11, 0.12));
+}
+
+.map-pins {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.map-pin {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 132px;
+  min-height: 34px;
+  padding: 0 11px 0 9px;
+  border: 1px solid rgba(240, 217, 159, 0.46);
+  border-radius: 999px;
+  background: rgba(13, 13, 11, 0.76);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  transform: translate(-50%, -50%);
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+  white-space: nowrap;
+}
+
+.map-pin::before {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(215, 188, 125, 0.18);
+  content: "";
+}
+
+.map-pin:hover,
+.map-pin:focus-visible {
+  border-color: rgba(240, 217, 159, 0.78);
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+.map-pin.is-active {
+  border-color: rgba(240, 217, 159, 0.94);
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  color: #16120a;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.34);
+}
+
+.map-pin.is-active::before {
+  background: #16120a;
+  box-shadow: 0 0 0 4px rgba(22, 18, 10, 0.18);
 }
 
 .location-tabs {
@@ -280,6 +424,11 @@ h2 {
   display: block;
 }
 
+.viewer-error span {
+  margin-top: 6px;
+  color: #ffe1db;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -363,6 +512,29 @@ h2 {
   .tour-section,
   .details-section {
     padding: 56px 0;
+  }
+
+  .tour-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .floorplan-card {
+    position: static;
+  }
+
+  .map-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .floorplan-card.is-collapsed .floorplan-body {
+    display: none;
+  }
+
+  .floorplan-map,
+  .floorplan-map img {
+    min-height: 220px;
   }
 
   #panorama {

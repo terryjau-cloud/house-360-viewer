@@ -40,22 +40,41 @@
         </p>
       </div>
 
-      <div class="location-tabs" aria-label="Panorama viewpoint controls">
-        <button class="location-tab is-active" type="button" data-view="living" aria-pressed="true">Living Room</button>
-        <button class="location-tab" type="button" data-view="window" aria-pressed="false">Window View</button>
-        <button class="location-tab" type="button" data-view="entry" aria-pressed="false">Entry View</button>
-      </div>
+      <div class="tour-layout">
+        <aside class="floorplan-card" aria-labelledby="floorplan-title">
+          <div class="floorplan-header">
+            <div>
+              <p class="eyebrow">Floorplan map</p>
+              <h3 id="floorplan-title">Room Navigator</h3>
+            </div>
+            <button class="map-toggle" id="map-toggle" type="button" aria-expanded="true" aria-controls="floorplan-body">
+              Hide
+            </button>
+          </div>
 
-      <div class="viewer-shell">
-        <div class="viewer-status viewer-loading" id="viewer-loading" role="status">
-          <span class="loading-mark" aria-hidden="true"></span>
-          <span>Loading 360 tour</span>
+          <div class="floorplan-body" id="floorplan-body">
+            <div class="floorplan-map">
+              <img src="assets/floorplan/floorplan.png" alt="Apartment floorplan map">
+              <div class="map-pins" id="map-pins" aria-label="Floorplan room locations"></div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="tour-view">
+          <div class="location-tabs" id="room-tabs" aria-label="Panorama room controls"></div>
+
+          <div class="viewer-shell">
+            <div class="viewer-status viewer-loading" id="viewer-loading" role="status">
+              <span class="loading-mark" aria-hidden="true"></span>
+              <span>Loading 360 tour</span>
+            </div>
+            <div class="viewer-status viewer-error" id="viewer-error" role="alert" hidden>
+              <strong>Panorama unavailable</strong>
+              <span id="viewer-error-message">Please confirm the panorama image exists and can be loaded.</span>
+            </div>
+            <div id="panorama" aria-label="360 degree apartment panorama"></div>
+          </div>
         </div>
-        <div class="viewer-status viewer-error" id="viewer-error" role="alert" hidden>
-          <strong>Panorama unavailable</strong>
-          <span>Please confirm assets/panoramas/livingroom.jpg exists and can be loaded.</span>
-        </div>
-        <div id="panorama" aria-label="360 degree living room panorama"></div>
       </div>
     </section>
 
