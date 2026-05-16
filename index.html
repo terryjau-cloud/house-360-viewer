@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>360 Rental Showcase</title>
+  <title>360 租屋展示</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="index.html">360 Rental Showcase</a>
-      <a class="nav-link" href="#tour">View Tour</a>
+    <nav class="nav" aria-label="主要導覽">
+      <a class="brand" href="index.html">360 租屋展示</a>
+      <a class="nav-link" href="#tour">查看導覽</a>
     </nav>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-content">
-        <p class="eyebrow">Virtual Apartment Tour</p>
-        <h1 id="page-title">360 Rental Showcase</h1>
+        <p class="eyebrow">線上租屋導覽</p>
+        <h1 id="page-title">360 租屋展示</h1>
         <p class="hero-copy">
-          Step into a refined rental preview designed for confident, elegant apartment viewing.
+          以高質感 360 環景預覽租屋空間，快速掌握格局、採光與生活動線。
         </p>
         <div class="hero-actions">
-          <a class="primary-action" href="#tour">Start virtual tour</a>
-          <a class="secondary-action" href="#details">View details</a>
+          <a class="primary-action" href="#tour">開始 360 導覽</a>
+          <a class="secondary-action" href="#details">查看租屋資訊</a>
         </div>
       </div>
     </section>
 
     <section id="tour" class="tour-section" aria-labelledby="tour-title">
       <div class="section-heading">
-        <p class="eyebrow">Immersive viewing</p>
-        <h2 id="tour-title">Virtual Apartment Tour</h2>
+        <p class="eyebrow">沉浸式看屋</p>
+        <h2 id="tour-title">租屋 360 導覽</h2>
         <p>
-          Move through curated viewpoints, zoom in on finishes, and experience the room before an in-person visit.
+          透過房間按鈕與格局圖定位點切換場景，先在線上感受每個空間的細節。
         </p>
       </div>
 
@@ -44,35 +44,35 @@
         <aside class="floorplan-card" aria-labelledby="floorplan-title">
           <div class="floorplan-header">
             <div>
-              <p class="eyebrow">Floorplan map</p>
-              <h3 id="floorplan-title">Room Navigator</h3>
+              <p class="eyebrow">格局圖</p>
+              <h3 id="floorplan-title">小地圖導航</h3>
             </div>
             <button class="map-toggle" id="map-toggle" type="button" aria-expanded="true" aria-controls="floorplan-body">
-              Hide
+              收合
             </button>
           </div>
 
           <div class="floorplan-body" id="floorplan-body">
             <div class="floorplan-map">
-              <img src="assets/floorplan/floorplan.png" alt="Apartment floorplan map">
-              <div class="map-pins" id="map-pins" aria-label="Floorplan room locations"></div>
+              <img src="assets/floorplan/floorplan.png" alt="租屋格局圖">
+              <div class="map-pins" id="map-pins" aria-label="格局圖房間定位點"></div>
             </div>
           </div>
         </aside>
 
         <div class="tour-view">
-          <div class="location-tabs" id="room-tabs" aria-label="Panorama room controls"></div>
+          <div class="location-tabs" id="room-tabs" aria-label="360 場景切換按鈕"></div>
 
           <div class="viewer-shell">
             <div class="viewer-status viewer-loading" id="viewer-loading" role="status">
               <span class="loading-mark" aria-hidden="true"></span>
-              <span>Loading 360 tour</span>
+              <span>正在載入 360 導覽</span>
             </div>
             <div class="viewer-status viewer-error" id="viewer-error" role="alert" hidden>
-              <strong>Panorama unavailable</strong>
-              <span id="viewer-error-message">Please confirm the panorama image exists and can be loaded.</span>
+              <strong>無法載入 360 圖片</strong>
+              <span id="viewer-error-message">請確認對應的 360 圖片已放入指定路徑。</span>
             </div>
-            <div id="panorama" aria-label="360 degree apartment panorama"></div>
+            <div id="panorama" aria-label="租屋 360 環景畫面"></div>
           </div>
         </div>
       </div>
@@ -80,32 +80,32 @@
 
     <section id="details" class="details-section" aria-labelledby="details-title">
       <div class="section-heading">
-        <p class="eyebrow">Residence notes</p>
-        <h2 id="details-title">Curated rental highlights</h2>
+        <p class="eyebrow">租屋資訊</p>
+        <h2 id="details-title">精選空間亮點</h2>
       </div>
 
       <div class="details-grid">
         <article class="detail-card">
-          <span class="detail-label">Layout</span>
-          <strong>1 Bedroom</strong>
-          <p>Balanced proportions with a connected living and dining area.</p>
+          <span class="detail-label">格局</span>
+          <strong>多房彈性規劃</strong>
+          <p>客廳、餐廳、臥室與衛浴場景完整串接，方便快速比較空間動線。</p>
         </article>
         <article class="detail-card">
-          <span class="detail-label">Mood</span>
-          <strong>Quiet Luxury</strong>
-          <p>Clean lines, calm contrast, and a refined first impression.</p>
+          <span class="detail-label">風格</span>
+          <strong>低調精品感</strong>
+          <p>深色介面搭配細緻金色點綴，讓租屋展示更沉穩、現代且有質感。</p>
         </article>
         <article class="detail-card">
-          <span class="detail-label">Viewing</span>
-          <strong>Online First</strong>
-          <p>Shortlist the space with a polished 360 preview before visiting.</p>
+          <span class="detail-label">看屋方式</span>
+          <strong>先線上看屋</strong>
+          <p>透過 360 環景與格局圖小地圖，先篩選適合的空間再安排現場看屋。</p>
         </article>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>&copy; 2026 360 Rental Showcase. Built for GitHub Pages.</p>
+    <p>&copy; 2026 360 租屋展示。適用於 GitHub Pages 靜態部署。</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>

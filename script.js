@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: "guest-bedroom-1",
-      label: "客臥1",
+      label: "客臥 1",
       panorama: "assets/panoramas/guest-bedroom-1.jpg",
       map: { x: 26, y: 30 },
       view: { pitch: 0, yaw: -18, hfov: 100 }
     },
     {
       id: "guest-bedroom-2",
-      label: "客臥2",
+      label: "客臥 2",
       panorama: "assets/panoramas/guest-bedroom-2.jpg",
       map: { x: 25, y: 70 },
       view: { pitch: 0, yaw: 42, hfov: 100 }
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       id: "outside",
-      label: "房子外觀/門外",
+      label: "房子外觀 / 門外",
       panorama: "assets/panoramas/outside.jpg",
       map: { x: 50, y: 86 },
       view: { pitch: -2, yaw: 0, hfov: 98 }
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mapToggle.addEventListener("click", function () {
       var isCollapsed = floorplanCard.classList.toggle("is-collapsed");
 
-      mapToggle.textContent = isCollapsed ? "Show" : "Hide";
+      mapToggle.textContent = isCollapsed ? "展開" : "收合";
       mapToggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
     });
   }
