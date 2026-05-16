@@ -85,3 +85,7 @@ This project deploys the generated `dist/` folder through GitHub Actions.
 3. Go to **Settings** > **Pages**.
 4. Set **Source** to **GitHub Actions**.
 5. Wait for the **Deploy GitHub Pages** workflow to finish.
+
+If GitHub Pages is still configured as **Deploy from a branch**, GitHub may show the repository README instead of the built site. Change the Pages source to **GitHub Actions** so the generated `dist/` folder is deployed.
+
+如果 GitHub Pages 仍設定為 **Deploy from a branch**，GitHub 可能會顯示 README 而不是建置後網站。請將 Pages 來源改成 **GitHub Actions**，讓 workflow 部署產生的 `dist/`。

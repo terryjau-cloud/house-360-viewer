@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   root: ".",
   publicDir: "public",
-  base: "./",
+  base: "/house-360-viewer/",
   build: {
     outDir: "dist",
     emptyOutDir: true,
@@ -12,9 +12,7 @@ export default defineConfig({
     minify: "esbuild",
     sourcemap: false,
     rollupOptions: {
-      input: {
-        index: "src/index.html"
-      }
+      input: "src/index.html"
     }
   },
   esbuild: {
