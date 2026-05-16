@@ -78,6 +78,7 @@ button {
 .nav-link,
 .primary-action,
 .secondary-action,
+.hero-toggle,
 .location-tab,
 .map-toggle,
 .map-pin {
@@ -128,6 +129,16 @@ button {
   background: rgba(10, 10, 9, 0.34);
   box-shadow: 0 20px 80px rgba(0, 0, 0, 0.28);
   backdrop-filter: var(--blur);
+}
+
+.hero-toggle {
+  display: none;
+  min-height: 32px;
+  padding: 0 12px;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
 }
 
 .eyebrow {
@@ -508,19 +519,60 @@ h2 {
 @media (max-width: 760px) {
   .nav {
     width: min(100% - 24px, 1440px);
-    min-height: 58px;
+    min-height: 52px;
   }
 
   .hero-overlay {
-    top: 76px;
+    top: 64px;
     left: 12px;
-    right: 12px;
-    padding: 16px;
-    border-radius: 18px;
+    right: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: min(308px, calc(100vw - 24px));
+    padding: 10px 11px;
+    border-radius: 16px;
+    row-gap: 2px;
+  }
+
+  .hero-overlay .eyebrow {
+    grid-column: 1;
+    margin-bottom: 1px;
+    font-size: 0.62rem;
+  }
+
+  .hero-overlay h1 {
+    grid-column: 1;
+    margin: 0;
+  }
+
+  .hero-overlay p:last-of-type {
+    grid-column: 1 / -1;
+    max-height: 90px;
+    margin: 8px 0 0;
+    overflow: hidden;
+    font-size: 0.82rem;
+    opacity: 1;
+    transition: max-height 220ms ease, margin 220ms ease, opacity 180ms ease;
+  }
+
+  .hero-overlay.is-collapsed p:last-of-type {
+    max-height: 0;
+    margin-top: 0;
+    opacity: 0;
+  }
+
+  .hero-toggle {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
   }
 
   h1 {
-    font-size: clamp(1.9rem, 9vw, 3.1rem);
+    font-size: clamp(1.18rem, 5.4vw, 1.55rem);
+    line-height: 1.06;
   }
 
   #panorama {
@@ -528,11 +580,16 @@ h2 {
   }
 
   .location-tabs {
-    bottom: 14px;
-    max-height: 152px;
-    overflow-y: auto;
+    left: 10px;
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    flex-wrap: nowrap;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
     justify-content: flex-start;
-    padding: 0 2px;
+    gap: 7px;
+    padding: 0 2px 2px;
     scrollbar-width: none;
   }
 
@@ -541,14 +598,18 @@ h2 {
   }
 
   .location-tab {
-    flex: 1 1 calc(50% - 8px);
-    min-width: 132px;
+    flex: 0 0 auto;
+    min-width: auto;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 0.78rem;
   }
 
   .floorplan-card {
     right: 12px;
-    bottom: 186px;
-    width: min(252px, calc(100vw - 24px));
+    bottom: 58px;
+    width: min(172px, calc(100vw - 24px));
+    border-radius: 16px;
   }
 
   .floorplan-card:hover,
@@ -557,10 +618,25 @@ h2 {
     transform: none;
   }
 
+  .floorplan-header {
+    padding: 9px 10px;
+  }
+
+  .floorplan-header .eyebrow {
+    display: none;
+  }
+
+  .floorplan-header h2 {
+    font-size: 0.86rem;
+  }
+
   .map-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    min-height: 30px;
+    padding: 0 10px;
+    font-size: 0.76rem;
   }
 
   .floorplan-card.is-collapsed {
@@ -573,7 +649,7 @@ h2 {
 
   .floorplan-map,
   .floorplan-map img {
-    min-height: 154px;
+    min-height: 132px;
   }
 
   .details-section {

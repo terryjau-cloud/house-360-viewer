@@ -76,6 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var mapToggle = document.getElementById("map-toggle");
   var floorplanCard = document.querySelector(".floorplan-card");
   var floorplanImage = document.querySelector(".floorplan-map img");
+  var heroOverlay = document.getElementById("hero-overlay");
+  var heroToggle = document.getElementById("hero-toggle");
+  var mobileQuery = window.matchMedia("(max-width: 760px)");
 
   function getRoom(roomId) {
     return rooms.find(function (room) {
@@ -238,6 +241,52 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  if (heroToggle && heroOverlay) {
+    heroToggle.addEventListener("click", function () {
+      var isCollapsed = heroOverlay.classList.toggle("is-collapsed");
+
+      heroToggle.textContent = isCollapsed ? "資訊" : "收合";
+      heroToggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+    });
+  }
+
+  function syncMobileOverlays() {
+    if (!mobileQuery.matches) {
+      if (floorplanCard && mapToggle) {
+        floorplanCard.classList.remove("is-collapsed");
+        mapToggle.textContent = "收合";
+        mapToggle.setAttribute("aria-expanded", "true");
+      }
+
+      if (heroOverlay && heroToggle) {
+        heroOverlay.classList.remove("is-collapsed");
+        heroToggle.textContent = "資訊";
+        heroToggle.setAttribute("aria-expanded", "true");
+      }
+
+      return;
+    }
+
+    if (floorplanCard && mapToggle) {
+      floorplanCard.classList.add("is-collapsed");
+      mapToggle.textContent = "展開";
+      mapToggle.setAttribute("aria-expanded", "false");
+    }
+
+    if (heroOverlay && heroToggle) {
+      heroOverlay.classList.add("is-collapsed");
+      heroToggle.textContent = "資訊";
+      heroToggle.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  if (typeof mobileQuery.addEventListener === "function") {
+    mobileQuery.addEventListener("change", syncMobileOverlays);
+  } else if (typeof mobileQuery.addListener === "function") {
+    mobileQuery.addListener(syncMobileOverlays);
+  }
+
+  syncMobileOverlays();
   renderRoomControls();
   switchRoom(currentRoomId);
 });
