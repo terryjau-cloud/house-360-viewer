@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>360 Rental Showcase</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html">360 Rental Showcase</a>
+      <a class="nav-link" href="#tour">View Tour</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-content">
+        <p class="eyebrow">Modern rental viewing</p>
+        <h1 id="page-title">360 Rental Showcase</h1>
+        <p class="hero-copy">
+          Explore a bright living room with an immersive 360-degree preview before scheduling your visit.
+        </p>
+        <a class="primary-action" href="#tour">Start virtual tour</a>
+      </div>
+    </section>
+
+    <section id="tour" class="tour-section" aria-labelledby="tour-title">
+      <div class="section-heading">
+        <p class="eyebrow">Interactive panorama</p>
+        <h2 id="tour-title">Living Room</h2>
+        <p>
+          Drag to look around, use controls to zoom, and preview the space from anywhere.
+        </p>
+      </div>
+
+      <div class="viewer-shell">
+        <div id="panorama" aria-label="360 degree living room panorama"></div>
+      </div>
+    </section>
+
+    <section class="details-section" aria-labelledby="details-title">
+      <div class="section-heading">
+        <p class="eyebrow">Property snapshot</p>
+        <h2 id="details-title">A simple rental preview</h2>
+      </div>
+
+      <div class="details-grid">
+        <article class="detail-card">
+          <span class="detail-label">Layout</span>
+          <strong>1 Bedroom</strong>
+          <p>Comfortable plan with a connected living and dining area.</p>
+        </article>
+        <article class="detail-card">
+          <span class="detail-label">Best For</span>
+          <strong>City Living</strong>
+          <p>Designed for renters who want a practical, easy-to-tour space.</p>
+        </article>
+        <article class="detail-card">
+          <span class="detail-label">Viewing</span>
+          <strong>Online First</strong>
+          <p>Use the 360 tour to shortlist the room before an in-person visit.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 360 Rental Showcase. Built for GitHub Pages.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
