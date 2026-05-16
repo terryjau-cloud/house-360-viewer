@@ -19,50 +19,67 @@
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-content">
-        <p class="eyebrow">Modern rental viewing</p>
+        <p class="eyebrow">Virtual Apartment Tour</p>
         <h1 id="page-title">360 Rental Showcase</h1>
         <p class="hero-copy">
-          Explore a bright living room with an immersive 360-degree preview before scheduling your visit.
+          Step into a refined rental preview designed for confident, elegant apartment viewing.
         </p>
-        <a class="primary-action" href="#tour">Start virtual tour</a>
+        <div class="hero-actions">
+          <a class="primary-action" href="#tour">Start virtual tour</a>
+          <a class="secondary-action" href="#details">View details</a>
+        </div>
       </div>
     </section>
 
     <section id="tour" class="tour-section" aria-labelledby="tour-title">
       <div class="section-heading">
-        <p class="eyebrow">Interactive panorama</p>
-        <h2 id="tour-title">Living Room</h2>
+        <p class="eyebrow">Immersive viewing</p>
+        <h2 id="tour-title">Virtual Apartment Tour</h2>
         <p>
-          Drag to look around, use controls to zoom, and preview the space from anywhere.
+          Move through curated viewpoints, zoom in on finishes, and experience the room before an in-person visit.
         </p>
       </div>
 
+      <div class="location-tabs" aria-label="Panorama viewpoint controls">
+        <button class="location-tab is-active" type="button" data-view="living" aria-pressed="true">Living Room</button>
+        <button class="location-tab" type="button" data-view="window" aria-pressed="false">Window View</button>
+        <button class="location-tab" type="button" data-view="entry" aria-pressed="false">Entry View</button>
+      </div>
+
       <div class="viewer-shell">
+        <div class="viewer-status viewer-loading" id="viewer-loading" role="status">
+          <span class="loading-mark" aria-hidden="true"></span>
+          <span>Loading 360 tour</span>
+        </div>
+        <div class="viewer-status viewer-error" id="viewer-error" role="alert" hidden>
+          <strong>Panorama unavailable</strong>
+          <span>Please confirm assets/panoramas/livingroom.jpg exists and can be loaded.</span>
+        </div>
         <div id="panorama" aria-label="360 degree living room panorama"></div>
       </div>
     </section>
 
-    <section class="details-section" aria-labelledby="details-title">
+    <section id="details" class="details-section" aria-labelledby="details-title">
       <div class="section-heading">
-        <p class="eyebrow">Property snapshot</p>
-        <h2 id="details-title">A simple rental preview</h2>
+        <p class="eyebrow">Residence notes</p>
+        <h2 id="details-title">Curated rental highlights</h2>
       </div>
 
       <div class="details-grid">
         <article class="detail-card">
           <span class="detail-label">Layout</span>
           <strong>1 Bedroom</strong>
-          <p>Comfortable plan with a connected living and dining area.</p>
+          <p>Balanced proportions with a connected living and dining area.</p>
         </article>
         <article class="detail-card">
-          <span class="detail-label">Best For</span>
-          <strong>City Living</strong>
-          <p>Designed for renters who want a practical, easy-to-tour space.</p>
+          <span class="detail-label">Mood</span>
+          <strong>Quiet Luxury</strong>
+          <p>Clean lines, calm contrast, and a refined first impression.</p>
         </article>
         <article class="detail-card">
           <span class="detail-label">Viewing</span>
           <strong>Online First</strong>
-          <p>Use the 360 tour to shortlist the room before an in-person visit.</p>
+          <p>Shortlist the space with a polished 360 preview before visiting.</p>
         </article>
       </div>
     </section>
