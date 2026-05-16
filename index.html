@@ -12,70 +12,50 @@
   <header class="site-header">
     <nav class="nav" aria-label="主要導覽">
       <a class="brand" href="index.html">360 租屋展示</a>
-      <a class="nav-link" href="#tour">查看導覽</a>
+      <a class="nav-link" href="#details">租屋資訊</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero" aria-labelledby="page-title">
-      <div class="hero-content">
-        <p class="eyebrow">線上租屋導覽</p>
-        <h1 id="page-title">360 租屋展示</h1>
-        <p class="hero-copy">
-          以高質感 360 環景預覽租屋空間，快速掌握格局、採光與生活動線。
-        </p>
-        <div class="hero-actions">
-          <a class="primary-action" href="#tour">開始 360 導覽</a>
-          <a class="secondary-action" href="#details">查看租屋資訊</a>
-        </div>
-      </div>
-    </section>
-
     <section id="tour" class="tour-section" aria-labelledby="tour-title">
-      <div class="section-heading">
-        <p class="eyebrow">沉浸式看屋</p>
-        <h2 id="tour-title">租屋 360 導覽</h2>
-        <p>
-          透過房間按鈕與格局圖定位點切換場景，先在線上感受每個空間的細節。
-        </p>
+      <div class="hero-overlay">
+        <p class="eyebrow">沉浸式 VR 看屋</p>
+        <h1 id="tour-title">精品租屋 360 導覽</h1>
+        <p>以格局圖與場景切換快速瀏覽客廳、臥室、衛浴與戶外空間。</p>
       </div>
 
-      <div class="tour-layout">
-        <aside class="floorplan-card" aria-labelledby="floorplan-title">
-          <div class="floorplan-header">
-            <div>
-              <p class="eyebrow">格局圖</p>
-              <h3 id="floorplan-title">小地圖導航</h3>
-            </div>
-            <button class="map-toggle" id="map-toggle" type="button" aria-expanded="true" aria-controls="floorplan-body">
-              收合
-            </button>
+      <div class="viewer-shell">
+        <div class="viewer-status viewer-loading" id="viewer-loading" role="status">
+          <span class="loading-mark" aria-hidden="true"></span>
+          <span>正在準備沉浸式看屋體驗</span>
+        </div>
+        <div class="viewer-status viewer-error" id="viewer-error" role="alert" hidden>
+          <strong>無法載入 360 圖片</strong>
+          <span id="viewer-error-message">請確認對應的 360 圖片已放入指定路徑。</span>
+        </div>
+        <div id="panorama" aria-label="租屋 360 環景畫面"></div>
+      </div>
+
+      <div class="location-tabs" id="room-tabs" aria-label="360 場景切換按鈕"></div>
+
+      <aside class="floorplan-card" aria-labelledby="floorplan-title">
+        <div class="floorplan-header">
+          <div>
+            <p class="eyebrow">格局圖</p>
+            <h2 id="floorplan-title">小地圖導航</h2>
           </div>
+          <button class="map-toggle" id="map-toggle" type="button" aria-expanded="true" aria-controls="floorplan-body">
+            收合
+          </button>
+        </div>
 
-          <div class="floorplan-body" id="floorplan-body">
-            <div class="floorplan-map">
-              <img src="assets/floorplan/floorplan.png" alt="租屋格局圖">
-              <div class="map-pins" id="map-pins" aria-label="格局圖房間定位點"></div>
-            </div>
-          </div>
-        </aside>
-
-        <div class="tour-view">
-          <div class="location-tabs" id="room-tabs" aria-label="360 場景切換按鈕"></div>
-
-          <div class="viewer-shell">
-            <div class="viewer-status viewer-loading" id="viewer-loading" role="status">
-              <span class="loading-mark" aria-hidden="true"></span>
-              <span>正在載入 360 導覽</span>
-            </div>
-            <div class="viewer-status viewer-error" id="viewer-error" role="alert" hidden>
-              <strong>無法載入 360 圖片</strong>
-              <span id="viewer-error-message">請確認對應的 360 圖片已放入指定路徑。</span>
-            </div>
-            <div id="panorama" aria-label="租屋 360 環景畫面"></div>
+        <div class="floorplan-body" id="floorplan-body">
+          <div class="floorplan-map">
+            <img src="assets/floorplan/floorplan.png" alt="租屋格局圖">
+            <div class="map-pins" id="map-pins" aria-label="格局圖房間定位點"></div>
           </div>
         </div>
-      </div>
+      </aside>
     </section>
 
     <section id="details" class="details-section" aria-labelledby="details-title">
@@ -88,17 +68,17 @@
         <article class="detail-card">
           <span class="detail-label">格局</span>
           <strong>多房彈性規劃</strong>
-          <p>客廳、餐廳、臥室與衛浴場景完整串接，方便快速比較空間動線。</p>
+          <p>客廳、餐廳、臥室、衛浴與陽台場景完整串接，方便快速比較空間動線。</p>
         </article>
         <article class="detail-card">
           <span class="detail-label">風格</span>
           <strong>低調精品感</strong>
-          <p>深色介面搭配細緻金色點綴，讓租屋展示更沉穩、現代且有質感。</p>
+          <p>深灰黑介面搭配米白細節，讓租屋展示更沉穩、現代且有質感。</p>
         </article>
         <article class="detail-card">
           <span class="detail-label">看屋方式</span>
           <strong>先線上看屋</strong>
-          <p>透過 360 環景與格局圖小地圖，先篩選適合的空間再安排現場看屋。</p>
+          <p>透過 360 環景與右下角小地圖，先篩選適合的空間再安排現場看屋。</p>
         </article>
       </div>
     </section>

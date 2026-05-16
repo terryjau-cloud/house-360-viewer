@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showError(path) {
     setLoading(false);
+    panorama.classList.remove("is-switching");
 
     if (errorMessage) {
       errorMessage.textContent = "請放入對應的 360 圖片：" + path;
@@ -179,6 +180,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     viewer.on("load", function () {
       setLoading(false);
+      window.setTimeout(function () {
+        panorama.classList.remove("is-switching");
+      }, 80);
     });
 
     viewer.on("error", function () {
@@ -189,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function switchRoom(roomId) {
     var room = getRoom(roomId);
 
-    if (!room) {
+    if (!room || room.id === currentRoomId && viewer) {
       return;
     }
 
@@ -197,6 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateActiveRoom(room.id);
     hideError();
     setLoading(true);
+    panorama.classList.add("is-switching");
 
     preloadImage(
       room.panorama,
