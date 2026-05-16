@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var floorplanCard = document.querySelector(".floorplan-card");
   var floorplanImage = document.querySelector(".floorplan-map img");
   var heroOverlay = document.getElementById("hero-overlay");
-  var heroToggle = document.getElementById("hero-toggle");
   var infoToggle = document.getElementById("info-toggle");
   var mobileQuery = window.matchMedia("(max-width: 760px)");
 
@@ -242,38 +241,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function setInfoPanelCollapsed(isCollapsed) {
+  function setHeroOverlayCollapsed(isCollapsed) {
     if (!heroOverlay) {
       return;
     }
 
     heroOverlay.classList.toggle("is-collapsed", isCollapsed);
-
-    if (heroToggle) {
-      heroToggle.textContent = isCollapsed ? "資訊" : "收合";
-      heroToggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
-    }
-
-    if (infoToggle) {
-      infoToggle.textContent = isCollapsed ? "資訊" : "收合";
-      infoToggle.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
-    }
   }
 
-  function toggleInfoPanel() {
-    if (!heroOverlay) {
+  function isDetailsHash() {
+    return window.location.hash === "#details";
+  }
+
+  function updateInfoToggleLabel() {
+    if (!infoToggle) {
       return;
     }
 
-    setInfoPanelCollapsed(!heroOverlay.classList.contains("is-collapsed"));
+    infoToggle.textContent = isDetailsHash() ? "返回導覽" : "資訊";
   }
 
-  if (heroToggle && heroOverlay) {
-    heroToggle.addEventListener("click", toggleInfoPanel);
-  }
+  if (infoToggle) {
+    infoToggle.addEventListener("click", function () {
+      window.location.hash = isDetailsHash() ? "tour" : "details";
+      updateInfoToggleLabel();
+    });
 
-  if (infoToggle && heroOverlay) {
-    infoToggle.addEventListener("click", toggleInfoPanel);
+    window.addEventListener("hashchange", updateInfoToggleLabel);
   }
 
   function syncMobileOverlays() {
@@ -284,9 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mapToggle.setAttribute("aria-expanded", "true");
       }
 
-      if (heroOverlay) {
-        setInfoPanelCollapsed(false);
-      }
+      setHeroOverlayCollapsed(false);
 
       return;
     }
@@ -297,9 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
       mapToggle.setAttribute("aria-expanded", "false");
     }
 
-    if (heroOverlay) {
-      setInfoPanelCollapsed(true);
-    }
+    setHeroOverlayCollapsed(true);
   }
 
   if (typeof mobileQuery.addEventListener === "function") {
@@ -309,6 +299,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   syncMobileOverlays();
+  updateInfoToggleLabel();
   renderRoomControls();
   switchRoom(currentRoomId);
 });
